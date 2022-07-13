@@ -1,7 +1,7 @@
 ---
 - hosts: all
 
-- tasks:
+  tasks:
     - name: Signal from guest vm
       debug:
         msg: "hello from  {{ ansible_hostname }}"

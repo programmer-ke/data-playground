@@ -38,13 +38,14 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--memory", 2048]
         v.customize ["modifyvm", :id, "--cpus", "2"]
       end
+
     end
 
-    # configure ansible provisioning characteristics
-    config.vm.provision "ansible" do |ansible|
-      ansible.playbook = "cluster.yml"
-    end
+  end
 
+  # configure ansible provisioning characteristics
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "cluster.yml"
   end
 
   # Disable automatic box update checking. If you disable this, then
