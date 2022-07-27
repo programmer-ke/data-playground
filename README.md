@@ -1,7 +1,7 @@
 # ansible-data-playground
 Set up a cluster of debian servers with hadoop and spark
 
-# Local cluster
+# Local cluster setup
 
 To set up a cluster in your dev machine, install [vagrant][1] and
 [ansible][2]
@@ -11,16 +11,15 @@ To set up a cluster in your dev machine, install [vagrant][1] and
 
 Then in the project root, run `vagrant up`.
 
-This should download and install everything in your local cluster.
-Afterwards, to repeat the
-process without having removed all resources via `vagrant destroy`,
+This should download and install everything in your local cluster if
+this is the first time.
+
+Afterwards, you can run `vagrant up` to start up the cluster, but to
+repeat the setting up process
 you will need to include the provisioning flag i.e.
-`vagrant up --provision`.
+`vagrant up --provision`, or run `vagrant provision` after the
+cluster is up.
 
-# done
-- Can run `vagrant up` to bring up a 3 node cluster
-  - use ansible version 2.10 (debian 11 default)
-
-# todo
-- Check that apt packages are up to date
-- Install hadoop dependencies
+To shut down the local cluster, run `vagrant halt` and to all the
+resources associated with
+the clusters, run `vagrant destroy`.
