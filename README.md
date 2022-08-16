@@ -14,12 +14,10 @@ Then in the project root, run `vagrant up`.
 This should download and install everything in your local cluster if
 this is the first time.
 
-Afterwards, you can run `vagrant up` to start up the cluster, but to
-repeat the setting up process
-you will need to include the provisioning flag i.e.
-`vagrant up --provision`, or run `vagrant provision` after the
-cluster is up.
+Afterwards, you can run `vagrant up` to start up the cluster. If you
+want to repeat the setting up process you will need to include the
+provisioning flag i.e.  `vagrant up --provision`, or run
+`vagrant provision` after the cluster is up.
 
-To shut down the local cluster, run `vagrant halt` and to all the
-resources associated with
-the clusters, run `vagrant destroy`.
+To shut down the local cluster, run `vagrant halt`. To delete all the
+resources associated with the cluster, run `vagrant destroy`.
