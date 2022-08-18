@@ -1,4 +1,4 @@
-# ansible-data-playground
+# data-playground
 Set up a cluster of debian servers with hadoop and spark
 
 # Local cluster setup
