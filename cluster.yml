@@ -1,6 +1,13 @@
 ---
 - hosts: all
 
+  pre_tasks:
+    - name: Do a full upgrade if first run on the server
+      # todo:
+      # - only run if we do not have the hadoop directory in $HOME
+      # - This is likely the first run on the server, as we do not
+      #   want to do a full-upgrade and risk data loss of some sort
+
   tasks:
     - name: Signal from guest vm
       debug:
