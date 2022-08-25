@@ -1,14 +1,32 @@
 ---
 - hosts: all
+  become: yes
 
   pre_tasks:
-    - name: Do a full upgrade if first run on the server
-      # todo:
-      # - only run if we do not have the hadoop directory in $HOME
-      # - This is likely the first run on the server, as we do not
-      #   want to do a full-upgrade and risk data loss of some sort
+    - name: Update apt cache
+      apt: update_cache=yes cache_valid_time=3600  # 1 hr
+
+    - name: Check if this is the first run of the play (absence of ~/hadoop)
+      stat:
+        path: "/home/{{ ansible_user }}/hadoop"
+      register: check
+
+    - name: Perform a full upgrade on first run
+      # we assume absence of ~/hadoop indicates this is first run
+      apt: upgrade=full
+      when: check.stat.isdir is not defined or not check.stat.isdir
+      notify: reboot server
+
+    - name: Perform safe upgrade
+      # Safe upgrade on subsequent runs to limit any data loss risks
+      apt: upgrade=safe
+      when: check.stat.isdir is defined and check.stat.isdir
 
   tasks:
     - name: Signal from guest vm
       debug:
         msg: "hello from  {{ ansible_hostname }}"
+
+  handlers:
+    - name: reboot server
+      reboot: msg="Rebooting after a full upgrade"
