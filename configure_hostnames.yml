@@ -1,0 +1,17 @@
+---
+- name: Rename hostname in /etc/hostname
+  hostname:
+    name: "{{ hostname }}"
+  notify: restart networking
+
+# todo: fix issue with duplicate hostname entries
+# after the following task
+# Causes network error
+- name: Set cluster entries in /etc/hosts
+  lineinfile:
+    dest: /etc/hosts
+    regexp: "^{{ item }}"
+    line: "{{ item }} {{ hostvars[item]['hostname'] }}"
+    state: present
+  loop: "{{ groups['all'] }}"
+  notify: restart networking

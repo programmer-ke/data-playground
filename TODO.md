@@ -1,7 +1,12 @@
 ### Todo
 - [ ] Install hadoop dependencies
+- [ ] Generate and distribute masters ssh pub key to workers
+      - https://docs.ansible.com/ansible/latest/collections/community/crypto/openssh_keypair_module.html
+- [ ] Distribute the hadoop installation between nodes
+      - https://stackoverflow.com/q/25505146/1382495
 
 ### In Progress
+- [ ] Configure hostname and /etc/hosts for each server
 
 ### Done
 - [x] Check that apt packages are up to date
