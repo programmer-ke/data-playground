@@ -3,6 +3,9 @@
   become: yes
 
   pre_tasks:
+
+    - include_tasks: configure_hostnames.yml
+
     - name: Update apt cache
       apt: update_cache=yes cache_valid_time=3600  # 1 hr
 
@@ -23,15 +26,14 @@
       when: hadoop_home.stat.isdir is defined and hadoop_home.stat.isdir
 
   tasks:
+
     - name: Signal from guest vm
       debug:
-        msg: "hello from  {{ hostname }}"
-    
-    - include_tasks: configure_hostnames.yml
+        msg: "{{ inventory_hostname }}"
 
   handlers:
     - name: reboot server
-      reboot: msg="Rebooting after a full upgrade"
+      reboot: msg="Rebooting host"
 
     - name: restart networking
       service: name=networking state=restarted

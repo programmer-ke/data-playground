@@ -6,9 +6,9 @@
       - https://stackoverflow.com/q/25505146/1382495
 
 ### In Progress
-- [ ] Configure hostname and /etc/hosts for each server
 
 ### Done
+- [x] Configure hostname and /etc/hosts for each server
 - [x] Check that apt packages are up to date
   - Do a full upgrade on first run, and a safe upgrade otherwise
 - [x] Use ansible insecure key for local ssh access

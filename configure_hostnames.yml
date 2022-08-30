@@ -1,17 +1,15 @@
 ---
 - name: Rename hostname in /etc/hostname
   hostname:
-    name: "{{ hostname }}"
+    name: "{{ inventory_hostname }}"
   notify: restart networking
 
 # todo: fix issue with duplicate hostname entries
-# after the following task
-# Causes network error
 - name: Set cluster entries in /etc/hosts
   lineinfile:
     dest: /etc/hosts
-    regexp: "^{{ item }}"
-    line: "{{ item }} {{ hostvars[item]['hostname'] }}"
+    regexp: '^.*\b{{ item }}\b.*'
+    line: '{{ hostvars[item]["ansible_host"] }} {{ item }}'
     state: present
-  loop: "{{ groups['all'] }}"
+  loop: "{{ groups['all'] }}"  # loop by hostname
   notify: restart networking

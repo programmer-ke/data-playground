@@ -22,7 +22,7 @@ hosts = {
 Vagrant.configure("2") do |config|
 
   # Use the default key (insecure key) on all VMs
-  # instead of generating new ones. Better emulates Ansible behavior
+  # instead of generating new ones. More closely emulates Ansible behavior
   # in the remote setup.
   # Private key path: ~/.vagrant.d/insecure_private_key
   config.ssh.insert_key = false
@@ -48,6 +48,7 @@ Vagrant.configure("2") do |config|
   # configure ansible provisioning characteristics
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "cluster.yml"
+    ansible.inventory_path = "hosts.ini"
   end
 
 end
