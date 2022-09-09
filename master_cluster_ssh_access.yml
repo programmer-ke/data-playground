@@ -1,0 +1,20 @@
+---
+- block: 
+    - name: Ensure master hadoop user has an SSH key
+      community.crypto.openssh_keypair:
+        path: /home/{{ ansible_user }}/.ssh/id_rsa
+      become: no
+
+    - name: Fetch public ssh key from master to localhost
+      fetch:
+        src: /home/{{ ansible_user }}/.ssh/id_rsa.pub
+        dest: /tmp/data-playground-master-ssh-key.pub
+        flat: yes
+  when: inventory_hostname == "master"
+
+- name: Set master ssh key in authorized hosts for workers
+  ansible.posix.authorized_key:
+    user: "{{ ansible_user }}"
+    state: present
+    key: "{{ lookup('file', '/tmp/data-playground-master-ssh-key.pub') }}"
+  when: inventory_hostname != "master"

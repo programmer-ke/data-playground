@@ -27,16 +27,7 @@
 
   tasks:
 
-    - name: Signal from guest vm
-      debug:
-        msg: "Hello from {{ inventory_hostname }}"
-
-    # setup master ssh access
-    - name: Ensure master hadoop user has an SSH key
-      community.crypto.openssh_keypair:
-        path: /home/{{ ansible_user }}/.ssh/id_rsa
-      become: no
-      when: inventory_hostname == "master"
+    - include_tasks: master_cluster_ssh_access.yml
 
   handlers:
     - name: reboot server
