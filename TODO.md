@@ -5,12 +5,11 @@
 
 ### In Progress
 
-- [ ] Generate and distribute masters ssh pub key to workers
+### Done
+- [x] Generate and distribute masters ssh pub key to workers
       - https://docs.ansible.com/ansible/latest/collections/community/crypto/openssh_keypair_module.html
       - https://docs.ansible.com/ansible/latest/collections/ansible/builtin/fetch_module.html
 	  - https://docs.ansible.com/ansible/latest/collections/ansible/posix/authorized_key_module.html
-
-### Done
 - [x] Configure hostname and /etc/hosts for each server
 - [x] Check that apt packages are up to date
   - Do a full upgrade on first run, and a safe upgrade otherwise
