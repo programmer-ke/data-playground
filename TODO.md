@@ -1,11 +1,14 @@
 ### Todo
-- [ ] Install hadoop dependencies
 - [ ] Distribute the hadoop installation between nodes
+      - https://dlcdn.apache.org/hadoop/common/
       - https://stackoverflow.com/q/25505146/1382495
 
 ### In Progress
 
 ### Done
+
+- [x] Install hadoop dependencies
+  - openjdk-11
 - [x] Generate and distribute masters ssh pub key to workers
       - https://docs.ansible.com/ansible/latest/collections/community/crypto/openssh_keypair_module.html
       - https://docs.ansible.com/ansible/latest/collections/ansible/builtin/fetch_module.html

@@ -29,6 +29,9 @@
 
     - include_tasks: master_cluster_ssh_access.yml
 
+    - name: Ensure that we have the jdk installed
+      apt: pkg=openjdk-11-jdk state=present
+
   handlers:
     - name: reboot server
       reboot: msg="Rebooting host"
