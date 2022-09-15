@@ -1,0 +1,19 @@
+---
+- name: Fetch hadoop distribution on master
+  get_url:
+    url: "https://dlcdn.apache.org/hadoop/common/hadoop-{{ hadoop_version }}/hadoop-{{ hadoop_version }}.tar.gz"
+    dest: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}.tar.gz"
+    checksum: "sha512:{{ hadoop_sha512_checksum }}"
+  when: inventory_hostname == 'master'
+
+- name: Ensure rsync is present
+  apt: pkg=rsync state=present
+
+- name: Sync hadoop from master to worker nodes
+  ansible.posix.synchronize:
+    src: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}.tar.gz"
+    dest: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}.tar.gz"
+    mode: push
+  delegate_to: master
+  when: inventory_hostname != 'master'
+  become: no
