@@ -17,3 +17,16 @@
   delegate_to: master
   when: inventory_hostname != 'master'
   become: no
+
+- name: Decompress the hadoop distribution
+  unarchive:
+    src: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}.tar.gz"
+    dest: "/home/{{ ansible_user }}"
+    remote_src: yes
+    creates: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}/bin"
+
+- name: Symlink decompressed hadoop directory to /home/<user>/hadoop
+  file:
+    src: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}"
+    dest: "/home/{{ ansible_user }}/hadoop"
+    state: link

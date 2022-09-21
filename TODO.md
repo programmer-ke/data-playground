@@ -2,15 +2,14 @@
 
 ### In Progress
 
-- [ ] Distribute the hadoop installation between nodes
+### Done
+
+- [x] Distribute the hadoop installation between nodes
       - https://dlcdn.apache.org/hadoop/common/
       - https://stackoverflow.com/q/25505146/1382495
 	  - steps:
 	    - download, verify and sync
 	    - unarchive
-
-### Done
-
 - [x] Install hadoop dependencies
   - openjdk-11
 - [x] Generate and distribute masters ssh pub key to workers
