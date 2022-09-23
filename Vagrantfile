@@ -41,14 +41,16 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--cpus", "2"]
       end
 
+      if name == "worker2"
+        # This is the last server being started.
+        # Provision the cluster
+        machine.vm.provision :ansible do |ansible|
+          # Disable default limit to connect to all machines
+          ansible.limit = "all"
+          ansible.playbook = "cluster.yml"
+          ansible.inventory_path = "hosts.ini"
+        end
+      end
     end
-
   end
-
-  # configure ansible provisioning characteristics
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "cluster.yml"
-    ansible.inventory_path = "hosts.ini"
-  end
-
 end

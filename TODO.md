@@ -1,9 +1,18 @@
 ### Todo
 
+- [ ] Fix first run check
+- [ ] Can set up all the required environment variables
+- [ ] Can configure hadoop
+- [ ] Can format hdfs
+- [ ] Can run hdfs
+- [ ] Can run yarn
+
 ### In Progress
 
 ### Done
 
+- [x] `vagrant up --provision` should provision the VMs when all of
+      them are running, instead of serially
 - [x] Distribute the hadoop installation between nodes
       - https://dlcdn.apache.org/hadoop/common/
       - https://stackoverflow.com/q/25505146/1382495
