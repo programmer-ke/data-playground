@@ -1,12 +1,14 @@
 ### Todo
 
-- [ ] Can set up all the required environment variables
 - [ ] Can configure hadoop
 - [ ] Can format hdfs
 - [ ] Can run hdfs
 - [ ] Can run yarn
 
 ### In Progress
+
+- [ ] Can set up all the required environment variables
+  - http://mywiki.wooledge.org/DotFiles
 
 
 ### Done
