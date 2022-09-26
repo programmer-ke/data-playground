@@ -1,6 +1,5 @@
 ### Todo
 
-- [ ] Fix first run check
 - [ ] Can set up all the required environment variables
 - [ ] Can configure hadoop
 - [ ] Can format hdfs
@@ -9,8 +8,11 @@
 
 ### In Progress
 
+
 ### Done
 
+- [x] Fix first run check
+	- dist-upgrade only runs if hdfs is not set up
 - [x] `vagrant up --provision` should provision the VMs when all of
       them are running, instead of serially
 - [x] Distribute the hadoop installation between nodes

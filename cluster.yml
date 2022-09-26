@@ -5,6 +5,7 @@
   vars:
     - hadoop_version: "3.3.4"
     - hadoop_sha512_checksum: "ca5e12625679ca95b8fd7bb7babc2a8dcb2605979b901df9ad137178718821097b67555115fafc6dbf6bb32b61864ccb6786dbc555e589694a22bf69147780b4"
+    - hdfs_root: "/home/{{ ansible_user }}/data"
 
   pre_tasks:
 
@@ -13,21 +14,20 @@
     - name: Update apt cache
       apt: update_cache=yes cache_valid_time=3600  # 1 hr
 
-    - name: Check if this is the first run of the play (absence of ~/hadoop)
+    - name: Check if hdfs is already set up
       stat:
-        path: "/home/{{ ansible_user }}/hadoop"
-      register: hadoop_home
+        path: "{{ hdfs_root }}"
+      register: hdfs_root_result
 
-    - name: Perform a comprehensive upgrade on first run
-      # we assume absence of ~/hadoop indicates this is first run
+    - name: Perform a comprehensive upgrade if hdfs is not set up
       apt: upgrade=dist
-      when: hadoop_home.stat.isdir is not defined or not hadoop_home.stat.isdir
+      when: hdfs_root_result.stat.isdir is not defined or not hdfs_root_result.stat.isdir
       notify: reboot server
 
     - name: Perform safe upgrade
-      # Safe upgrade on subsequent runs to limit any data loss risks
+      # Safe upgrade only if hdfs is set up to limit any data loss risks
       apt: upgrade=safe
-      when: hadoop_home.stat.isdir is defined and hadoop_home.stat.isdir
+      when: hdfs_root_result.stat.isdir is defined and hdfs_root_result.stat.isdir
 
   tasks:
 
