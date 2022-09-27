@@ -6,6 +6,7 @@
     - hadoop_version: "3.3.4"
     - hadoop_sha512_checksum: "ca5e12625679ca95b8fd7bb7babc2a8dcb2605979b901df9ad137178718821097b67555115fafc6dbf6bb32b61864ccb6786dbc555e589694a22bf69147780b4"
     - hdfs_root: "/home/{{ ansible_user }}/data"
+    - hadoop_home: "/home/{{ ansible_user }}/hadoop"
 
   pre_tasks:
 
@@ -37,6 +38,8 @@
       apt: pkg=openjdk-11-jdk state=present
 
     - include_tasks: setup_hadoop_distribution.yml
+
+    - include_tasks: configure_hadoop.yml
 
   handlers:
     - name: reboot server

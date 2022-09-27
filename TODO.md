@@ -7,12 +7,12 @@
 
 ### In Progress
 
-- [ ] Can set up all the required environment variables
-  - http://mywiki.wooledge.org/DotFiles
 
 
 ### Done
 
+- [x] Can set up all the required environment variables
+  - http://mywiki.wooledge.org/DotFiles
 - [x] Fix first run check
 	- dist-upgrade only runs if hdfs is not set up
 - [x] `vagrant up --provision` should provision the VMs when all of

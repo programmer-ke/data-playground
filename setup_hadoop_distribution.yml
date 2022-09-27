@@ -25,8 +25,8 @@
     remote_src: yes
     creates: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}/bin"
 
-- name: Symlink decompressed hadoop directory to /home/<user>/hadoop
+- name: Symlink decompressed hadoop directory to hadoop home
   file:
     src: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}"
-    dest: "/home/{{ ansible_user }}/hadoop"
+    dest: "{{ hadoop_home }}"
     state: link

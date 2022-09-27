@@ -1,0 +1,12 @@
+---
+- name: Setup hadoop environment variables
+  template:
+    src: templates/etc_profile_hadoop.sh.j2
+    dest: /etc/profile.d/hadoop.sh
+
+- name: Setup JAVA_HOME in hadoop-env.sh
+  lineinfile:
+    dest: "{{ hadoop_home }}/etc/hadoop/hadoop-env.sh"
+    regexp: "^export JAVA_HOME"
+    line: "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
+    state: present
