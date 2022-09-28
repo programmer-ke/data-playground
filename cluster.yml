@@ -8,6 +8,9 @@
     - hdfs_root: "/home/{{ ansible_user }}/data"
     - hadoop_home: "/home/{{ ansible_user }}/hadoop"
 
+  vars_files:
+    - vars.yml
+
   pre_tasks:
 
     - include_tasks: configure_hostnames.yml

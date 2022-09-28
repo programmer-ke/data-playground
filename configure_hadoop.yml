@@ -10,3 +10,11 @@
     regexp: "^export JAVA_HOME"
     line: "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64"
     state: present
+
+- name: Configure hadoop site
+  template:
+    src: templates/hadoop-site-config.xml.j2
+    dest: "{{ hadoop_home }}/etc/hadoop/{{ item.key }}.xml"
+  vars:
+    config_dict: "{{ item.value }}"
+  loop: "{{ hadoop_site_configuration | dict2items }}"
