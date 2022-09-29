@@ -13,8 +13,15 @@ hadoop_site_configuration:
     yarn.app.mapreduce.am.env: HADOOP_MAPRED_HOME=$HADOOP_HOME
     mapreduce.map.env: HADOOP_MAPRED_HOME=$HADOOP_HOME
     mapreduce.reduce.env: HADOOP_MAPRED_HOME=$HADOOP_HOME
+    yarn.app.mapreduce.am.resource.mb: 512
+    mapreduce.map.memory.mb: 256
+    mapreduce.reduce.memory.mb: 256
 
   yarn-site:
     yarn.acl.enable: 0
     yarn.resourcemanager.hostname: 203.0.113.0
     yarn.nodemanager.aux-services: mapreduce_shuffle
+    yarn.nodemanager.resource.memory-mb: 1536
+    yarn.scheduler.maximum-allocation-mb: 1536
+    yarn.scheduler.minimum-allocation-mb: 128
+    yarn.nodemanager.vmem-check-enabled: "false"

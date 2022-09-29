@@ -18,3 +18,8 @@
   vars:
     config_dict: "{{ item.value }}"
   loop: "{{ hadoop_site_configuration | dict2items }}"
+
+- name: Specify workers
+  template:
+    src: templates/etc_hadoop_workers.j2
+    dest: "{{ hadoop_home }}/etc/hadoop/workers"

@@ -1,0 +1,5 @@
+{% for hostname in groups['all'] %}
+{% if hostname != 'master' %}
+{{ hostname }}
+{% endif %}
+{% endfor %}
