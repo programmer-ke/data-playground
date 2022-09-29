@@ -6,10 +6,9 @@
 
 ### In Progress
 
-- [ ] Can configure hadoop
-
 ### Done
 
+- [x] Can configure hadoop
 - [x] Can set up all the required environment variables
   - http://mywiki.wooledge.org/DotFiles
 - [x] Fix first run check
