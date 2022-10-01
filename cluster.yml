@@ -44,6 +44,17 @@
 
     - include_tasks: configure_hadoop.yml
 
+    - block:
+
+      - name: Format hdfs for first time use
+        command: "{{ hadoop_home }}/bin/hdfs namenode -format creates={{ hdfs_root }}"
+
+      - name: Start HDFS
+        command: "{{ hadoop_home }}/sbin/start-dfs.sh"
+
+      when: inventory_hostname == "master"
+      become: no
+
   handlers:
     - name: reboot server
       reboot: msg="Rebooting host"

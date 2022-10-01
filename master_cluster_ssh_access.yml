@@ -12,9 +12,10 @@
         flat: yes
   when: inventory_hostname == "master"
 
-- name: Set master ssh key in authorized hosts for workers
+- name: Set master ssh key in authorized hosts
+  # For some reason, we seem to need it in master as well
+  # todo: investigate if this is really required
   ansible.posix.authorized_key:
     user: "{{ ansible_user }}"
     state: present
     key: "{{ lookup('file', '/tmp/data-playground-master-ssh-key.pub') }}"
-  when: inventory_hostname != "master"

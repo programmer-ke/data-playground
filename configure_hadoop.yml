@@ -23,3 +23,10 @@
   template:
     src: templates/etc_hadoop_workers.j2
     dest: "{{ hadoop_home }}/etc/hadoop/workers"
+
+- name: Ensure logs directory is writeable by hadoop user
+  file:
+    path: "{{ hadoop_home }}/logs"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
