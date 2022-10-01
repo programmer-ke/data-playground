@@ -1,13 +1,13 @@
 ### Todo
 
-- [ ] Can run yarn
+
 
 ### In Progress
 
 
-
 ### Done
 
+- [x] Can run yarn
 - [x] Can run hdfs
 - [x] Can format hdfs
 - [x] Can configure hadoop

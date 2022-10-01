@@ -19,7 +19,7 @@ hadoop_site_configuration:
 
   yarn-site:
     yarn.acl.enable: 0
-    yarn.resourcemanager.hostname: 203.0.113.0
+    yarn.resourcemanager.hostname: master
     yarn.nodemanager.aux-services: mapreduce_shuffle
     yarn.nodemanager.resource.memory-mb: 1536
     yarn.scheduler.maximum-allocation-mb: 1536
