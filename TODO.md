@@ -1,6 +1,6 @@
 ### Todo
 
-
+- [ ] A mapping from host directory to master node when using vagrant
 
 ### In Progress
 
