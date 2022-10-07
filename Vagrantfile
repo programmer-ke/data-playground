@@ -46,6 +46,9 @@ Vagrant.configure("2") do |config|
       if name == "master"
         machine.vm.synced_folder "~/data-playground-projects", "/projects", create: true
       end
+      # You can also edit the section above to sync different locations
+      # if preferred. More documentation in the following link:
+      # https://developer.hashicorp.com/vagrant/docs/synced-folders/basic_usage#create
 
       if name == "worker2"
         # This is the last server being started.
