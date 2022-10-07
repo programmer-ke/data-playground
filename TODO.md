@@ -2,10 +2,10 @@
 
 ### In Progress
 
-- [ ] A mapping from host directory to master node when using vagrant
-
 ### Done
 
+- [x] A mapping from host directory to master node when using vagrant
+  - Directory at $HOME/data-playground-project will be synced to master node VM
 - [x] Can run yarn
 - [x] Can run hdfs
 - [x] Can format hdfs

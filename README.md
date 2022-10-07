@@ -37,10 +37,12 @@ resources associated with the cluster, run `vagrant destroy`.
 By default, vagrant will sync the the project root (where the
 Vagrantfile is located) to `/vagrant` within each cluster VM.
 
-Additionally, you can create a directory called `workspace` inside the
-project root that will synced to `/workspace` in the master node. Git
-has been set to ignore contents of this directory so you can place
-data and code that you do not want to track as part of this repository
-in it. You will find these files in `/workspace` inside the master
-node.
+Additionally, a directory named `data-playground-projects` will be
+created in your home directory and its contents will synced to the
+directory `/projects` in the master node. You can place any code and
+data that you want to access in the master node in it, and after you
+ssh into master via `vagrant ssh master`, you'll find them in
+`/projects`.
 
+This can be disabled by removing the relevant section in the
+[Vagrantfile](Vagrantfile). Search for 'disable syncing'.
