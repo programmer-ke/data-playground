@@ -31,3 +31,16 @@ interface.
 
 To shut down the local cluster, run `vagrant halt`. To delete all the
 resources associated with the cluster, run `vagrant destroy`.
+
+## Syncing files to local master node
+
+By default, vagrant will sync the the project root (where the
+Vagrantfile is located) to `/vagrant` within each cluster VM.
+
+Additionally, you can create a directory called `workspace` inside the
+project root that will synced to `/workspace` in the master node. Git
+has been set to ignore contents of this directory so you can place
+data and code that you do not want to track as part of this repository
+in it. You will find these files in `/workspace` inside the master
+node.
+

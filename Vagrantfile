@@ -41,6 +41,10 @@ Vagrant.configure("2") do |config|
         v.customize ["modifyvm", :id, "--cpus", "2"]
       end
 
+      if name == "master"
+        machine.vm.synced_folder "workspace/", "/workspace", create: true
+      end
+
       if name == "worker2"
         # This is the last server being started.
         # Provision the cluster
