@@ -46,3 +46,22 @@ ssh into master via `vagrant ssh master`, you'll find them in
 
 This can be disabled by removing the relevant section in the
 [Vagrantfile](Vagrantfile). Search for 'disable syncing'.
+
+## Access URLs via hostnames
+
+The local cluster will use hostnames configured internally for
+communication amongst the nodes, and the jobs may contain these
+hostname. To access these URLs, one would have to replace the hostnames
+with the related IP as configured in the [Vagrantfile](Vagrantfile).
+For example replacing `master` in the URL with `192.168.30.30`.
+
+However, you can configured your host machine to recognize these
+URLs by updating the `/etc/hosts` file by adding the following lines
+at the end.
+
+```
+# For use with data-playground cluster
+192.168.30.30 master
+192.168.30.31 worker1
+192.168.30.32 worker2
+```
