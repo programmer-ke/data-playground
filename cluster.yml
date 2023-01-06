@@ -17,6 +17,7 @@
 
     - name: Update apt cache
       apt: update_cache=yes cache_valid_time=3600  # 1 hr
+      throttle: 1
 
     - name: Check if hdfs is already set up
       stat:
@@ -27,11 +28,13 @@
       apt: upgrade=dist
       when: hdfs_root_result.stat.isdir is not defined or not hdfs_root_result.stat.isdir
       notify: reboot server
+      throttle: 1
 
     - name: Perform safe upgrade
       # Safe upgrade only if hdfs is set up to limit any data loss risks
       apt: upgrade=safe
       when: hdfs_root_result.stat.isdir is defined and hdfs_root_result.stat.isdir
+      throttle: 1
 
   tasks:
 
