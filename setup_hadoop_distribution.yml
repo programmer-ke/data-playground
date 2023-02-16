@@ -1,13 +1,16 @@
 ---
-- name: Fetch hadoop distribution on master
+- name: Check if hadoop in installed
+  stat: "path=/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}/bin"
+  register: hadoop_installation_path
+
+- name: Download hadoop distribution in master if not installed in host
   get_url:
     url: "https://dlcdn.apache.org/hadoop/common/hadoop-{{ hadoop_version }}/hadoop-{{ hadoop_version }}.tar.gz"
     dest: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}.tar.gz"
     checksum: "sha512:{{ hadoop_sha512_checksum }}"
-  when: inventory_hostname == 'master'
-
-- name: Ensure rsync is present
-  apt: pkg=rsync state=present
+  delegate_to: master
+  when: hadoop_installation_path.stat.isdir is not defined or not hadoop_installation_path.stat.isdir
+  throttle: 1
 
 - name: Sync hadoop from master to worker nodes
   ansible.posix.synchronize:
@@ -15,7 +18,9 @@
     dest: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}.tar.gz"
     mode: push
   delegate_to: master
-  when: inventory_hostname != 'master'
+  when:
+    - inventory_hostname != 'master'
+    - hadoop_installation_path.stat.isdir is not defined or not hadoop_installation_path.stat.isdir
   become: no
 
 - name: Decompress the hadoop distribution
@@ -24,6 +29,13 @@
     dest: "/home/{{ ansible_user }}"
     remote_src: yes
     creates: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}/bin"
+  register: installation_task
+
+- name: Remove local copy of hadoop download if successfully installed
+  file:
+    path: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}.tar.gz"
+    state: absent
+  when: installation_task is succeeded or installation_task is skipped
 
 - name: Symlink decompressed hadoop directory to hadoop home
   file:

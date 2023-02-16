@@ -38,6 +38,9 @@
 
   tasks:
 
+    - name: Ensure rsync is present to sync files across cluster
+      apt: pkg=rsync state=present
+
     - include_tasks: master_cluster_ssh_access.yml
 
     - name: Ensure that we have the jdk installed
