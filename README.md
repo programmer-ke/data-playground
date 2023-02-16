@@ -50,7 +50,7 @@ This can be disabled by removing the relevant section in the
 ## Access URLs via hostnames
 
 The local cluster will use hostnames configured internally for
-communication amongst the nodes, and the jobs may contain these
+communication amongst the nodes, and the jobs URLs may contain these
 hostname. To access these URLs, one would have to replace the hostnames
 with the related IP as configured in the [Vagrantfile](Vagrantfile).
 For example replacing `master` in the URL with `192.168.30.30`.

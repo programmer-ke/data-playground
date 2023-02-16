@@ -42,6 +42,7 @@
 
     - name: Ensure that we have the jdk installed
       apt: pkg=openjdk-11-jdk state=present
+      throttle: 1
 
     - include_tasks: setup_hadoop_distribution.yml
 
@@ -55,6 +56,3 @@
   handlers:
     - name: reboot server
       reboot: msg="Rebooting host"
-
-    - name: restart networking
-      service: name=networking state=restarted

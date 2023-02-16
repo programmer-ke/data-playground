@@ -2,7 +2,7 @@
 - name: Rename hostname in /etc/hostname
   hostname:
     name: "{{ inventory_hostname }}"
-  notify: restart networking
+  notify: reboot server
 
 # todo: fix issue with duplicate hostname entries
 - name: Set cluster entries in /etc/hosts
@@ -12,4 +12,4 @@
     line: '{{ hostvars[item]["ansible_host"] }} {{ item }}'
     state: present
   loop: "{{ groups['all'] }}"  # loop by hostname
-  notify: restart networking
+  notify: reboot server

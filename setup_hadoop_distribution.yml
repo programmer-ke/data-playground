@@ -30,4 +30,3 @@
     src: "/home/{{ ansible_user }}/hadoop-{{ hadoop_version }}"
     dest: "{{ hadoop_home }}"
     state: link
-  
