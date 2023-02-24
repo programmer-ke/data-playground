@@ -1,0 +1,31 @@
+---
+- name: Check if spark in installed
+  stat: "path=/home/{{ ansible_user }}/spark-{{ spark_version }}-bin-hadoop3/bin"
+  register: spark_installation_path
+
+- name: Download spark distribution in master if not installed
+  get_url:
+    url: "https://dlcdn.apache.org/spark/spark-{{ spark_version }}/spark-{{ spark_version }}-bin-hadoop3.tgz"
+    dest: "/home/{{ ansible_user }}/spark-{{ spark_version }}-bin-hadoop3.tgz"
+    checksum: "sha512:{{ spark_sha512_checksum }}"
+  when: spark_installation_path.stat.isdir is not defined or not spark_installation_path.stat.isdir
+
+- name: Decompress the spark distribution
+  unarchive:
+    src: "/home/{{ ansible_user }}/spark-{{ spark_version }}-bin-hadoop3.tgz"
+    dest: "/home/{{ ansible_user }}"
+    remote_src: yes
+    creates: "/home/{{ ansible_user }}/spark-{{ spark_version }}-bin-hadoop3/bin"
+  register: installation_task
+
+- name: Delete the spark download if successfully installed
+  file:
+    path: "/home/{{ ansible_user }}/spark-{{ spark_version }}-bin-hadoop3.tgz"
+    state: absent
+  when: installation_task is succeeded or installation_task is skipped
+
+- name: Symlink decompressed spark directory to spark home
+  file:
+    src: "/home/{{ ansible_user }}/spark-{{ spark_version }}-bin-hadoop3"
+    dest: "{{ spark_home }}"
+    state: link

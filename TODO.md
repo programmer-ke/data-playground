@@ -1,9 +1,14 @@
 ### Todo
 
+- [ ] Successfully run a spark-submit job in the cluster
+
 ### In Progress
+
+- [ ] Configure spark for the cluster
 
 ### Done
 
+- [x] Download and install spark binaries
 - [x] A mapping from host directory to master node when using vagrant
   - Directory at $HOME/data-playground-project will be synced to master node VM
 - [x] Can run yarn
