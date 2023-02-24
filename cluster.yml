@@ -5,8 +5,10 @@
   vars:
     - hadoop_version: "3.3.4"
     - hadoop_sha512_checksum: "ca5e12625679ca95b8fd7bb7babc2a8dcb2605979b901df9ad137178718821097b67555115fafc6dbf6bb32b61864ccb6786dbc555e589694a22bf69147780b4"
-    - hdfs_root: "/home/{{ ansible_user }}/data"
+    - hdfs_data_root: "/home/{{ ansible_user }}/data"
     - hadoop_home: "/home/{{ ansible_user }}/hadoop"
+    - spark_version: "3.3.2"
+    - spark_sha512_checksum: "4cd2396069fbe0f8efde2af4fd301bf46f8c6317e9dea1dd42a405de6a38380635d49b17972cb92c619431acece2c3af4c23bfdf193cedb3ea913ed69ded23a1"
 
   vars_files:
     - vars.yml
@@ -21,19 +23,19 @@
 
     - name: Check if hdfs is already set up
       stat:
-        path: "{{ hdfs_root }}"
-      register: hdfs_root_result
+        path: "{{ hdfs_data_root }}"
+      register: hdfs_data_root_result
 
     - name: Perform a comprehensive upgrade if hdfs is not set up
       apt: upgrade=dist
-      when: hdfs_root_result.stat.isdir is not defined or not hdfs_root_result.stat.isdir
+      when: hdfs_data_root_result.stat.isdir is not defined or not hdfs_data_root_result.stat.isdir
       notify: reboot server
       throttle: 1
 
     - name: Perform safe upgrade
       # Safe upgrade only if hdfs is set up to limit any data loss risks
       apt: upgrade=safe
-      when: hdfs_root_result.stat.isdir is defined and hdfs_root_result.stat.isdir
+      when: hdfs_data_root_result.stat.isdir is defined and hdfs_data_root_result.stat.isdir
       throttle: 1
 
   tasks:
@@ -52,7 +54,7 @@
     - include_tasks: configure_hadoop.yml
 
     - name: Format hdfs for first time use
-      command: "{{ hadoop_home }}/bin/hdfs namenode -format creates={{ hdfs_root }}"
+      command: "{{ hadoop_home }}/bin/hdfs namenode -format creates={{ hdfs_data_root }}"
       when: inventory_hostname == "master"
       become: no
 
