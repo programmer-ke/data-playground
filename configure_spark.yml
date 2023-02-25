@@ -1,0 +1,51 @@
+---
+- name: Setup spark environment variables
+  template:
+    src: templates/etc_profile_spark.sh.j2
+    dest: /etc/profile.d/spark.sh
+
+- name: Ensure we have the spark-defaults file
+  command:
+    cmd: "cp {{ spark_home }}/conf/spark-defaults.conf.template {{ spark_home }}/conf/spark-defaults.conf"
+    creates: "{{ spark_home }}/conf/spark-defaults.conf"
+
+- name: Set spark defaults
+  lineinfile:
+    path: "{{ spark_home }}/conf/spark-defaults.conf"
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    - regexp: '^spark.master\s'
+      line: "spark.master  yarn"
+
+    - regexp: '^spark.driver.memory\s'
+      line: "spark.driver.memory  512m"
+
+    # note: spark.yarn.executor.memoryOverhead will be added to this
+    # the sum should be less than yarn container maximum memory value
+    # yarn.scheduler.maximum-allocation-mb
+    - regexp: '^spark.executor.memory\s'
+      line: "spark.executor.memory  512m"
+
+    # enable event logs
+    - regexp: '^spark.eventLog.enabled\s'
+      line: "spark.eventLog.enabled true"
+
+    - regexp: '^spark.eventLog.dir\s'
+      line: "spark.eventLog.dir hdfs://master:9000/spark-logs"
+
+    - regexp: '^spark.eventLog.dir\s'
+      line: "spark.eventLog.dir hdfs://master:9000/spark-logs"
+
+    # configure history server
+    - regexp: '^spark.history.provider\s'
+      line: "spark.history.provider org.apache.spark.deploy.history.FsHistoryProvider"
+
+    - regexp: '^spark.history.fs.logDirectory\s'
+      line: "spark.history.fs.logDirectory hdfs://master:9000/spark-logs"
+
+    - regexp: '^spark.history.fs.update.interval\s'
+      line: "spark.history.fs.update.interval 10s"
+
+    - regexp: '^spark.history.ui.port\s'
+      line: "spark.history.ui.port 18080"

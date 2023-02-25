@@ -5,6 +5,9 @@
 ### In Progress
 
 - [ ] Configure spark for the cluster
+  - create hdfs logs directory (needs hdfs running)
+    - https://www.linode.com/docs/guides/install-configure-run-spark-on-top-of-hadoop-yarn-cluster/#monitor-your-spark-applications
+	- see: https://stackoverflow.com/a/32499389/1382495
 
 ### Done
 
