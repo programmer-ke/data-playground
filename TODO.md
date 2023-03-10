@@ -4,13 +4,14 @@
 
 ### In Progress
 
-- [ ] Configure spark for the cluster
-  - create hdfs logs directory (needs hdfs running)
-    - https://www.linode.com/docs/guides/install-configure-run-spark-on-top-of-hadoop-yarn-cluster/#monitor-your-spark-applications
-	- see: https://stackoverflow.com/a/32499389/1382495
+- [ ] Figure out starting services via hdfs
 
 ### Done
 
+- [x] Configure spark for the cluster
+  - create hdfs logs directory (needs hdfs running)
+    - https://www.linode.com/docs/guides/install-configure-run-spark-on-top-of-hadoop-yarn-cluster/#monitor-your-spark-applications
+	- see: https://stackoverflow.com/a/32499389/1382495
 - [x] Download and install spark binaries
 - [x] A mapping from host directory to master node when using vagrant
   - Directory at $HOME/data-playground-project will be synced to master node VM

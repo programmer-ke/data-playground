@@ -19,15 +19,10 @@ want to run through the setting up process you will need to include the
 provisioning flag i.e.  `vagrant up --provision`, or run
 `vagrant provision` after the cluster is up.
 
-After the process is complete, you can SSH into master by using the
-command `vagrant ssh master`. 
-
-You can then run `start-dfs.sh` to start HDFS and `start-yarn.sh` to
-start yarn.
-
-Point your browser to http://192.168.30.30:9870 to see the HDFS web
-interface, and http://192.168.30.30:8088 to see the yarn web
-interface.
+After provisioning, the following web UIs will be available:
+ - HDFS: http://192.168.30.30:9870
+ - Yarn: http://192.168.30.30:8088
+ - Hadoop Job History: http://192.168.30.30:19888
 
 To shut down the local cluster, run `vagrant halt`. To delete all the
 resources associated with the cluster, run `vagrant destroy`.
