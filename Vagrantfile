@@ -42,7 +42,7 @@ Vagrant.configure("2") do |config|
       end
 
       # To disable syncing from your host machine to the master VM
-      # remove the following three lines
+      # remove or comment out the following three lines
       if name == "master"
         machine.vm.synced_folder "~/data-playground-projects", "/projects", create: true
       end

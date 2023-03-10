@@ -23,6 +23,7 @@ After provisioning, the following web UIs will be available:
  - HDFS: http://192.168.30.30:9870
  - Yarn: http://192.168.30.30:8088
  - Hadoop Job History: http://192.168.30.30:19888
+ - Spark Job History: http://192.168.30.30:18080
 
 To shut down the local cluster, run `vagrant halt`. To delete all the
 resources associated with the cluster, run `vagrant destroy`.

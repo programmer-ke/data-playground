@@ -49,3 +49,10 @@
 
     - regexp: '^spark.history.ui.port\s'
       line: "spark.history.ui.port 18080"
+
+- name: Ensure logs directory is writeable by spark user
+  file:
+    path: "{{ spark_home }}/logs"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
