@@ -1,13 +1,16 @@
 ### Todo
 
-- [ ] Successfully run a spark-submit job in the cluster
+- [ ] provisioning on remote hosts
+- [ ] Factor spark configs that are likely to be tweaked
 
 ### In Progress
 
-- [ ] Figure out starting services via hdfs
 
 ### Done
 
+- [x] Successfully run a spark-submit job in the cluster
+- [x] Figure out starting services via ansible
+  - using nohup seemed to help
 - [x] Configure spark for the cluster
   - create hdfs logs directory (needs hdfs running)
     - https://www.linode.com/docs/guides/install-configure-run-spark-on-top-of-hadoop-yarn-cluster/#monitor-your-spark-applications
