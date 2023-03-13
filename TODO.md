@@ -1,13 +1,15 @@
 ### Todo
 
 - [ ] provisioning on remote hosts
-- [ ] Factor spark configs that are likely to be tweaked
+
 
 ### In Progress
 
 
+
 ### Done
 
+- [x] Factor spark configs that are likely to be tweaked
 - [x] Successfully run a spark-submit job in the cluster
 - [x] Figure out starting services via ansible
   - using nohup seemed to help

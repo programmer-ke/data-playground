@@ -19,13 +19,13 @@
       line: "spark.master  yarn"
 
     - regexp: '^spark.driver.memory\s'
-      line: "spark.driver.memory  512m"
+      line: "spark.driver.memory  {{ spark_driver_memory }}"
 
     # note: spark.yarn.executor.memoryOverhead will be added to this
     # the sum should be less than yarn container maximum memory value
     # yarn.scheduler.maximum-allocation-mb
     - regexp: '^spark.executor.memory\s'
-      line: "spark.executor.memory  512m"
+      line: "spark.executor.memory  {{ spark_executor_memory }}"
 
     # enable event logs
     - regexp: '^spark.eventLog.enabled\s'
@@ -45,7 +45,7 @@
       line: "spark.history.fs.logDirectory hdfs://master:9000/spark-logs"
 
     - regexp: '^spark.history.fs.update.interval\s'
-      line: "spark.history.fs.update.interval 10s"
+      line: "spark.history.fs.update.interval {{ spark_history_update_interval }}"
 
     - regexp: '^spark.history.ui.port\s'
       line: "spark.history.ui.port 18080"

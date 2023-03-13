@@ -25,3 +25,8 @@ hadoop_site_configuration:
     yarn.scheduler.maximum-allocation-mb: 1536
     yarn.scheduler.minimum-allocation-mb: 128
     yarn.nodemanager.vmem-check-enabled: "false"
+
+# spark
+spark_driver_memory: 512m
+spark_executor_memory: 512m
+spark_history_update_interval: 10s
