@@ -4,7 +4,6 @@
     name: "{{ inventory_hostname }}"
   notify: reboot server
 
-# todo: fix issue with duplicate hostname entries
 - name: Set cluster entries in /etc/hosts
   lineinfile:
     dest: /etc/hosts

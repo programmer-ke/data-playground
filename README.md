@@ -20,10 +20,10 @@ provisioning flag i.e.  `vagrant up --provision`, or run
 `vagrant provision` after the cluster is up.
 
 After provisioning, the following web UIs will be available:
- - HDFS: http://192.168.30.30:9870
- - Yarn: http://192.168.30.30:8088
- - Hadoop Job History: http://192.168.30.30:19888
- - Spark Job History: http://192.168.30.30:18080
+ - HDFS: http://192.168.56.10:9870
+ - Yarn: http://192.168.56.10:8088
+ - Hadoop Job History: http://192.168.56.10:19888
+ - Spark Job History: http://192.168.56.10:18080
 
 To shut down the local cluster, run `vagrant halt`. To delete all the
 resources associated with the cluster, run `vagrant destroy`.
@@ -49,7 +49,7 @@ The local cluster will use hostnames configured internally for
 communication amongst the nodes, and the jobs URLs may contain these
 hostname. To access these URLs, one would have to replace the hostnames
 with the related IP as configured in the [Vagrantfile](Vagrantfile).
-For example replacing `master` in the URL with `192.168.30.30`.
+For example replacing `master` in the URL with `192.168.56.10`.
 
 However, you can configured your host machine to recognize these
 URLs by updating the `/etc/hosts` file by adding the following lines
@@ -57,7 +57,7 @@ at the end.
 
 ```
 # For use with data-playground cluster
-192.168.30.30 master
-192.168.30.31 worker1
-192.168.30.32 worker2
+192.168.56.10 master
+192.168.56.11 worker1
+192.168.56.12 worker2
 ```
