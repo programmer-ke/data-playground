@@ -1,6 +1,7 @@
 ### Todo
 
 - [ ] provisioning on remote hosts
+- [ ] Set spark to run in standalone mode
 
 
 ### In Progress
