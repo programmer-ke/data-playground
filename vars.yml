@@ -28,6 +28,7 @@ hadoop_site_configuration:
     yarn.nodemanager.resource.detect-hardware-capabilities: "true"
 
 # spark
+spark_master: spark://master:7077
 spark_driver_memory: 512m
 spark_executor_memory: 512m
 spark_history_update_interval: 10s

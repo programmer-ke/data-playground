@@ -19,11 +19,28 @@ want to run through the setting up process you will need to include the
 provisioning flag i.e.  `vagrant up --provision`, or run
 `vagrant provision` after the cluster is up.
 
-After provisioning, the following web UIs will be available:
- - HDFS: http://192.168.56.10:9870
- - Yarn: http://192.168.56.10:8088
- - Hadoop Job History: http://192.168.56.10:19888
- - Spark Job History: http://192.168.56.10:18080
+After provisioning, the HDFS web UI will be available at
+http://192.168.56.10:9870
+
+You can then SSH into the master node with `vagrant ssh master` and
+start the various services as follows.
+
+ - Yarn: `./hadoop/sbin/start-yarn.sh`. The web UI will be at
+   http://192.168.56.10:8088
+   
+ - Hadoop Job History Server: `./hadoop/bin/mapred --daemon start historyserver`
+   Web UI: http://192.168.56.10:19888
+
+ - Spark in standalone mode: `./spark/sbin/start-all.sh`. Web UI: http://192.168.56.10:8088
+
+ - Spark History Server: `./spark/sbin/start-history-server.sh`.
+   Web UI: http://192.168.56.10:18080
+
+Note that Spark is configured in standalone mode by default so it is
+not dependent on Yarn. To make Spark run with Yarn as the resource
+manager, change the value of `spark_master` in [vars.yml](vars.yml) to
+`yarn` and run `vagrant up --provision` again, shutting down spark
+standalone with `./spark/sbin/stop-all.sh` if it is running.
 
 To shut down the local cluster, run `vagrant halt`. To delete all the
 resources associated with the cluster, run `vagrant destroy`.
@@ -34,13 +51,13 @@ By default, vagrant will sync the the project root (where the
 Vagrantfile is located) to `/vagrant` within each cluster VM.
 
 Additionally, a directory named `projects` will be
-created in the project root directory and its contents will synced to
+created in the project's root directory and its contents will synced to
 the directory `/projects` in the master node. You can place any code
 and data that you want to access from within the master node in it,
 and after you ssh into master via `vagrant ssh master`, you'll find
 them in `/projects`.
 
-Any items in the `projects` folder will be ignored by git.
+Any files in the `projects` folder will be ignored by git.
 
 This can be disabled by removing the relevant section in the
 [Vagrantfile](Vagrantfile). Search for 'disable syncing'.

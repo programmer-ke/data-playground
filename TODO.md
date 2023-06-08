@@ -1,22 +1,20 @@
 ### Todo
 
 - [ ] provisioning on remote hosts
-
-
+- [ ] Test spark in standalone mode vs yarn
 
 
 ### In Progress
 
-- [ ] Set spark to run in standalone mode
+
+
+### Done
+- [x] Set spark to run in standalone mode
   - fix work directory
 	- 23/06/06 12:27:25 INFO Worker: Running Spark version 3.3.2
       23/06/06 12:27:25 INFO Worker: Spark home: /home/vagrant/spark
       23/06/06 12:27:25 ERROR Utils: Failed to create directory /home/vagrant/spark/work
       java.nio.file.AccessDeniedException: /home/vagrant/spark/work
-
-
-### Done
-
 - [x] Factor spark configs that are likely to be tweaked
 - [x] Successfully run a spark-submit job in the cluster
 - [x] Figure out starting services via ansible
