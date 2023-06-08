@@ -21,7 +21,7 @@
 
 - name: Specify workers
   template:
-    src: templates/etc_hadoop_workers.j2
+    src: templates/cluster_workers.j2
     dest: "{{ hadoop_home }}/etc/hadoop/workers"
 
 - name: Ensure logs directory is writeable by hadoop user

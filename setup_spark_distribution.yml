@@ -8,7 +8,20 @@
     url: "https://dlcdn.apache.org/spark/spark-{{ spark_version }}/spark-{{ spark_version }}-bin-hadoop3.tgz"
     dest: "/home/{{ ansible_user }}/spark-{{ spark_version }}-bin-hadoop3.tgz"
     checksum: "sha512:{{ spark_sha512_checksum }}"
+  delegate_to: master
   when: spark_installation_path.stat.isdir is not defined or not spark_installation_path.stat.isdir
+  throttle: 1
+
+- name: Sync spark from master to worker nodes
+  ansible.posix.synchronize:
+    src: "/home/{{ ansible_user }}/spark-{{ spark_version }}-bin-hadoop3.tgz"
+    dest: "/home/{{ ansible_user }}/spark-{{ spark_version }}-bin-hadoop3.tgz"
+    mode: push
+  delegate_to: master
+  when:
+    - inventory_hostname != 'master'
+    - spark_installation_path.stat.isdir is not defined or not spark_installation_path.stat.isdir
+  become: no
 
 - name: Decompress the spark distribution
   unarchive:

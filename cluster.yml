@@ -60,10 +60,8 @@
       become: no
 
     - include_tasks: setup_spark_distribution.yml
-      when: inventory_hostname == "master"
 
     - include_tasks: configure_spark.yml
-      when: inventory_hostname == "master"
 
     - include_tasks:
         file: start_cluster_services.yml

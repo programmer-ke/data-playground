@@ -16,7 +16,7 @@
     line: "{{ item.line }}"
   with_items:
     - regexp: '^spark.master\s'
-      line: "spark.master  yarn"
+      line: "spark.master  spark://master:7077"
 
     - regexp: '^spark.driver.memory\s'
       line: "spark.driver.memory  {{ spark_driver_memory }}"
@@ -50,9 +50,20 @@
     - regexp: '^spark.history.ui.port\s'
       line: "spark.history.ui.port 18080"
 
-- name: Ensure logs directory is writeable by spark user
+- name: Ensure we have a conf dir in spark home
+  file: "path={{ spark_home }}/conf state=directory"
+
+- name: Specify workers for the launch scripts
+  template:
+    src: templates/cluster_workers.j2
+    dest: "{{ spark_home }}/conf/workers"
+
+- name: Ensure directories are writeable by spark user
   file:
-    path: "{{ spark_home }}/logs"
+    path: "{{ spark_home }}/{{ item }}"
     state: directory
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
+  with_items:
+    - logs
+    - work
