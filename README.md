@@ -31,7 +31,7 @@ start the various services as follows.
  - Hadoop Job History Server: `./hadoop/bin/mapred --daemon start historyserver`
    Web UI: http://192.168.56.10:19888
 
- - Spark in standalone mode: `./spark/sbin/start-all.sh`. Web UI: http://192.168.56.10:8088
+ - Spark in standalone mode: `./spark/sbin/start-all.sh`. Web UI: http://192.168.56.10:8080
 
  - Spark History Server: `./spark/sbin/start-history-server.sh`.
    Web UI: http://192.168.56.10:18080
@@ -39,8 +39,8 @@ start the various services as follows.
 Note that Spark is configured in standalone mode by default so it is
 not dependent on Yarn. To make Spark run with Yarn as the resource
 manager, change the value of `spark_master` in [vars.yml](vars.yml) to
-`yarn` and run `vagrant up --provision` again, shutting down spark
-standalone with `./spark/sbin/stop-all.sh` if it is running.
+`yarn` and shut down spark standalone if it is already running with
+`./spark/sbin/stop-all.sh`.
 
 To shut down the local cluster, run `vagrant halt`. To delete all the
 resources associated with the cluster, run `vagrant destroy`.
