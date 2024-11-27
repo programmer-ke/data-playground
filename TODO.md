@@ -2,6 +2,7 @@
 
 - [ ] provisioning on remote hosts
 - [ ] Test spark in standalone mode vs yarn
+- [ ] A script to install custom packages across the cluster
 
 
 ### In Progress

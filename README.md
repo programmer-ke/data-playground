@@ -1,4 +1,7 @@
 # data-playground
+
+![data-playground logo](img/data-playground.jpeg)
+
 Set up a cluster of debian servers with hadoop and spark.
 
 # Local cluster setup
